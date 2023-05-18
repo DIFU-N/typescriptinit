@@ -9,10 +9,38 @@ function App() {
 
   // adding types to useRef.. note.. that can also be any other type
   const ref = useRef<HTMLInputElement>(null)
-  interface mol{
-    mol: string,
-    moa: number
+  //interfaces, similar to classes but you cannot create new instances
+  // they are only used to create structure
+  //like if we a varibale in the future and it's declaring itself to be an isPerson
+  //then it must have these properties and methods
+  interface isPerson {
+    name: string;
+    age: number;
+    speak(a: string): void; // must not have a return value
+    spend(b: number): number; // must return number
   }
+
+  const me: isPerson = {
+    name: 'Paul',
+    age: 29,
+    speak(text: string): void{
+      console.log(text);
+    },
+    spend(amount: number): number{
+      console.log(`You have spent ${amount} here today`);
+      return amount;      
+    }
+  }
+
+  const greetPerson = (person: isPerson) => {
+    console.log('hello ' + person.name);
+    console.log('i know you are ' + person.age);
+    person.speak('how far now?');
+    person.spend(4000);
+  }
+
+  greetPerson(me)
+  
 
   useEffect(() => {
     if (ref.current) {
@@ -20,9 +48,9 @@ function App() {
     }
   })
   class Invoice {
-    client: string;
-    details: string;
-    amount: number;
+    readonly client: string;
+    public details: string;
+    private amount: number;
 
     constructor(c: string, d: string, a: number) {
       this.client = c;
@@ -36,7 +64,10 @@ function App() {
   }
 
   const invOne = new Invoice('mario', 'work on the mario website', 250);
-  console.log(invOne.format());
+  //amount is private and can only be used within class
+  // console.log(invOne.details, invOne.amount);
+  // the public private readonly "modifiers" cannot be used to declarre variables
+  // public let modify = "asd";
   
   // basically created type over here
   let invoices: Invoice[] = [];
