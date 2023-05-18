@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,10 +6,19 @@ import './App.css'
 function App() {
   //this is how you define type for hooks.. crazy shii
   const [count, setCount] = useState<number>(2)
+
+  // adding types to useRef.. note.. that can also be any other type
+  const ref = useRef<HTMLInputElement>(null)
   interface mol{
     mol: string,
     moa: number
   }
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.focus()
+    }
+  })
   class Invoice {
     client: string;
     details: string;
@@ -35,6 +44,7 @@ function App() {
   return (
     <>
       <div>
+        {/* <input type='image' ref={ref} /> */}
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
