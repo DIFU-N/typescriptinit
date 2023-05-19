@@ -47,7 +47,49 @@ function App() {
       ref.current.focus()
     }
   })
-  class Invoice {
+  interface hasFormatter {
+    format(): string
+  }
+
+  // Generics
+const addUid = <T extends object>(obj: T)=>{
+  let uid = Math.floor(Math.random() * 100);
+  return {...obj, uid};
+}
+
+let docOne = addUid({name: "yahs", age: 10});
+console.log(docOne.name);//this works because of the extends keyword and the obj attached to it
+console.log(docOne.name); // wouldnt work if the it didnt extend anything, or if it extended like a string
+
+interface Reference<T> {
+  uid: number;
+  resourceName: string;
+  data: T;
+  //if you wanted to use different types for the data element, you would just need to declare the type as a generic type
+  //like Reference<T> and data: T; so this way, the type for element(data) can be whatever is passed
+  //in as the reference type
+}
+
+let docTwo: Reference<string> = {
+  uid: 3,
+  resourceName: 'jakems',
+  data: 'this can be a string'
+}
+
+let docThree: Reference<object> = {
+  uid: 1,
+  resourceName: 'asaa',
+  data: {
+    or: 'this can',
+    be: 'an object',
+  }
+}
+
+console.log(docTwo, docThree);
+
+
+
+  class Invoice implements hasFormatter {
     readonly client: string;
     public details: string;
     private amount: number;
@@ -57,13 +99,14 @@ function App() {
       this.details = d;
       this.amount = a;
     }
-
+    //the format method becomes required because the interface that this implements has it
     format() {
       return `${this.client} owes $${this.amount} for ${this.details}`;
     }
   }
-
   const invOne = new Invoice('mario', 'work on the mario website', 250);
+  let doc: hasFormatter[] = [];
+  doc.push(invOne);
   //amount is private and can only be used within class
   // console.log(invOne.details, invOne.amount);
   // the public private readonly "modifiers" cannot be used to declarre variables
