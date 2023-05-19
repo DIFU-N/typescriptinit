@@ -108,6 +108,21 @@ let docFour: EnumReference<string> = {
 console.log(docFour);
 
 
+//Tuples
+
+let arr = [true, 'rin', 70];
+arr[1] = false;
+arr[0] = 'vic';
+
+// array values or elements can be changed by setting them to different values 
+//this is not the case in Tuples, when the elemnts in a tuple have been defined, its type cannot be changed
+
+let tup: [string, number, boolean] = ['asaas', 1222, false]
+tup[0] = 'asd'; //this works because they have the same different
+// tup[1] = false; //this doesnt because of the boolean data type and tup[1] requires a number
+
+
+
   class Invoice implements hasFormatter {
     readonly client: string;
     public details: string;
