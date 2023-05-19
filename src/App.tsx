@@ -88,6 +88,25 @@ let docThree: Reference<object> = {
 console.log(docTwo, docThree);
 
 
+//ENUMS- allows for storage of constants and keywords and associate them with numeric value
+
+enum ResourceType { BOOK, AUTHOR, FILM, DIRECTOR, PERSON }
+
+interface EnumReference<T> {
+  uid: number;
+  resourceName: ResourceType;
+  data: T;
+}
+
+let docFour: EnumReference<string> = {
+  uid: 9,
+  data: 'jkjm',
+  resourceName: ResourceType.AUTHOR
+  //you'd think it would retirn book but nah.. it returns the index of book in the ResourceType
+}
+
+console.log(docFour);
+
 
   class Invoice implements hasFormatter {
     readonly client: string;
