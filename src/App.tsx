@@ -149,6 +149,7 @@ tup[0] = 'asd'; //this works because they have the same different
   // basically created type over here
   let invoices: Invoice[] = [];
   invoices.push(invOne)
+  throw new Error("Something went wrong!");
   return (
     <>
       <div>
